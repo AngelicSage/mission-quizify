@@ -20,6 +20,8 @@ If you run into a new problem, I rinse and repeated these 4 steps
 
 * It took me about 12 days to finish all of my assignments
 
+* I did not have a team during these but after hearing Mikhail say write about your team I think I made a mistake and didn't know I could get one 😅
+
 In the end, You don't have to resort to this
 ![boy-math](https://github.com/AngelicSage/mission-quizify/assets/142240060/f14e3f85-f185-4645-af87-d82a50832008)
 
