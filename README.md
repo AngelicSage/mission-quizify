@@ -21,9 +21,7 @@ If you run into a new problem, I rinse and repeated these 4 steps
 * It took me about 12 days to finish all of my assignments
 
 In the end, You don't have to resort to this
-![image](https://github.com/AngelicSage/mission-quizify/assets/142240060/da870ee8-ae68-43c0-a11c-9c007699745a)
-
-
+![boy-math](https://github.com/AngelicSage/mission-quizify/assets/142240060/f14e3f85-f185-4645-af87-d82a50832008)
 
 
 ### Credit 
