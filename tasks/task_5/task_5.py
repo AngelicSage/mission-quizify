@@ -21,6 +21,9 @@ class ChromaCollectionCreator:
         self.processor = processor      # This will hold the DocumentProcessor from Task 3
         self.embed_model = embed_model  # This will hold the EmbeddingClient from Task 4
         self.db = None                  # This will hold the Chroma collection
+    def as_retriever(self):
+        return self.db.as_retriever()  
+
     
     def create_chroma_collection(self):
         """
@@ -57,15 +60,34 @@ class ChromaCollectionCreator:
         # Use a TextSplitter from Langchain to split the documents into smaller text chunks
         # https://python.langchain.com/docs/modules/data_connection/document_transformers/character_text_splitter
         # [Your code here for splitting documents]
-        
-        if texts is not None:
-            st.success(f"Successfully split pages to {len(texts)} documents!", icon="✅")
+        text_splitter = CharacterTextSplitter(
+            separator="\n\n",
+            chunk_size=1000,
+            chunk_overlap=200,
+        )
 
+        # Ensure pages are strings
+        documents = [Document(page_content=str(page)) for page in self.processor.pages]
+        text_chunks = text_splitter.split_documents(documents)
+        
+        if not text_chunks:
+            st.error("Failed to split documents into chunks!", icon="🚨")
+            return
+        if text_chunks is not None:
+            st.success(f"Successfully split pages to {len(text_chunks)} documents!", icon="✅")
+    
         # Step 3: Create the Chroma Collection
         # https://docs.trychroma.com/
         # Create a Chroma in-memory client using the text chunks and the embeddings model
         # [Your code here for creating Chroma collection]
-        
+        from langchain_chroma import Chroma
+        self.db = Chroma.from_documents(
+            documents=text_chunks,
+            embedding=self.embed_model
+        )
+
+
+
         if self.db:
             st.success("Successfully created Chroma Collection!", icon="✅")
         else:
@@ -93,7 +115,7 @@ if __name__ == "__main__":
     
     embed_config = {
         "model_name": "textembedding-gecko@003",
-        "project": "YOUR PROJECT ID HERE",
+        "project": "bionic-mercury-427515-n7",
         "location": "us-central1"
     }
     
